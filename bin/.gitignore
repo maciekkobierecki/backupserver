@@ -1,9 +1,8 @@
 /BackupServer.class
 /Config.class
 /ConnectionHandler.class
+/FileMetadata.class
+/FilesScheduler.class
 /Main.class
-/BackupServer$Server.class
-/BackupServer$ServerImpl.class
-/Server.class
-/ServerImpl.class
+/RMIService.class
 /ServerInterface.class

@@ -26,21 +26,6 @@ public class Config {
 	public static String getProperty(String key){
 		return prop.getProperty(key);
 	}
-	public static void incrementLastClientId(){
-		try {
-			int lastId=Integer.parseInt(prop.getProperty("id"));
-			lastId++;
-			prop.setProperty("id", Integer.toString(lastId));
-			FileOutputStream out = new FileOutputStream("Config.properties");
-			prop.store(out,null);
-			out.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("config.properties file not found");
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 
 }

@@ -1,7 +1,8 @@
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface ServerInterface extends Remote {
-		public String lastModificationDate(String fileName) throws RemoteException;
+		public ArrayList<FileMetadata> getFilesExistingOnServer() throws RemoteException;
 	}
 
