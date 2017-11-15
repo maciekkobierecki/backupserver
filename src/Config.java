@@ -26,6 +26,6 @@ public class Config {
 	public static String getProperty(String key){
 		return prop.getProperty(key);
 	}
-	
+	public static
 
 }
