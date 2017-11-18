@@ -1,4 +1,5 @@
 import java.rmi.RemoteException;
+import java.rmi.server.ExportException;
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +9,7 @@ public class Main {
 			Config.init();
 			FilesScheduler.init();
 			FilesScheduler.loadMetadataListFromFile(Config.getProperty("serializedMetadataFile"));
-			RMIService rmiService=new RMIService();
+			RMIServer rmiService=new RMIServer();
 			rmiService.start();
 			BackupServer server=new BackupServer();
 			Runnable serverThread=server;
@@ -27,8 +28,11 @@ public class Main {
 
 				
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch(ExportException e){
+			System.out.println(e.getMessage());
+		}
+		catch (Exception e) {
+			System.out.println("Unable to start server");
 		}
 	}
 

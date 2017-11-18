@@ -82,5 +82,11 @@ public class FilesScheduler{
 			System.out.println(Config.getProperty("serializedMetadataFile")+" is invalid.");
 		}
 	}
+	public static synchronized String assignName() {
+		String assignedName=Config.prepareNextFileName();
+		return assignedName;
+		
+		
+	}
 	
 }
