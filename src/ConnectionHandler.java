@@ -9,9 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.Socket;
-import java.nio.ByteBuffer;
 
 public class ConnectionHandler implements Runnable {
 	public final static String PERMISSION="PERMISSION\n";
@@ -28,6 +26,7 @@ public class ConnectionHandler implements Runnable {
 	private InputStream inStream;
 	private OutputStream outStream;
 	private DataInputStream dinStream;
+	private BufferedReader responseReader;
 	private ObjectInputStream ois;
 	private FileMetadata metadata;
 	private String function;
@@ -35,6 +34,7 @@ public class ConnectionHandler implements Runnable {
 		incoming= socket;	
 		inStream=incoming.getInputStream();
 		outStream=incoming.getOutputStream();
+		responseReader=new BufferedReader(new InputStreamReader(inStream));
 		ois=new ObjectInputStream(inStream);
 		dinStream=new DataInputStream(inStream);
 	}
@@ -118,8 +118,8 @@ public class ConnectionHandler implements Runnable {
 		String response=readResponse();
 		System.out.println(response);
 	}
-	private String readResponse() throws IOException, ClassNotFoundException{
-		String response=(String) ois.readObject();
+	private String readResponse() throws IOException{
+		String response=responseReader.readLine();
 		return response;
 	}
 	private DataInputStream getDataInputStream() throws FileNotFoundException {
