@@ -19,6 +19,7 @@ public class FileMetadata implements Serializable {
 	public void setDate(String date){
 		//ROZWAZYC ZMIANE DATE NA TYP DATE
 	}
+	public void setNameOnServer(String name){ onServerName=name; }
 	public String getOnServerName(){ return onServerName; }
 	public String getFileDirectory() { return file.getAbsolutePath(); }
 	public String getDate() { return date; }
