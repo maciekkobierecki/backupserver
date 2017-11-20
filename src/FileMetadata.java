@@ -25,13 +25,13 @@ public class FileMetadata implements Serializable {
 	public String getDate() { return date; }
 	public String getFileName(){ return file.getName(); }
 	public String getFileExtension(){
-		String fileName=getFileName();
+		String fileName = getFileName();
 		String[] data=fileName.split("\\.");
 		return data[EXTENSION_POSITION];
 	}
 	//date format must be dd/MM/yyyy HH:ss:mm
 	public Boolean isOlderThan(String date) throws ParseException{
-		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy HH:ss:mm");
+		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date myDate=sdf.parse(this.date);
 		Date foreignDate=sdf.parse(date);
 		if(myDate.compareTo(foreignDate)<0)
