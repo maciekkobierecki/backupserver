@@ -23,6 +23,10 @@ public class RMIServer extends UnicastRemoteObject implements ServerInterface{
 		rmiRegistry.unbind("backupServer");
 		System.out.println("server stopped");
 	}
+	@Override
+	public void stopArchivization(FileMetadata metadata) throws RemoteException {
+		FilesScheduler.stopArchivization(metadata);
+	}
 	
 
 }

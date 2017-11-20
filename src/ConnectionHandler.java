@@ -21,12 +21,12 @@ public class ConnectionHandler implements Runnable {
 	public final static String UPLOAD_FUNCTION="upload";
 	public final static String DOWNLOAD_FUNCTION="download";
 	public final static String STORAGE_DIRECTORY="data\\";
+	public final static int SOCKET_TIMEOUT=100000;
 	private final static int FRAGMENT_SIZE=1048576;
 	private Socket incoming;
 	private InputStream inStream;
 	private OutputStream outStream;
 	private DataInputStream dinStream;
-	private BufferedReader responseReader;
 	private ObjectInputStream ois;
 	private FileMetadata metadata;
 	private String function;
@@ -34,9 +34,9 @@ public class ConnectionHandler implements Runnable {
 		incoming= socket;	
 		inStream=incoming.getInputStream();
 		outStream=incoming.getOutputStream();
-		responseReader=new BufferedReader(new InputStreamReader(inStream));
 		ois=new ObjectInputStream(inStream);
 		dinStream=new DataInputStream(inStream);
+		incoming.setSoTimeout(SOCKET_TIMEOUT);
 	}
 	private FileOutputStream getFileOutputStream(FileMetadata metadata) throws FileNotFoundException{
 		File file=new File(STORAGE_DIRECTORY+metadata.getOnServerName()+"."+metadata.getFileExtension());
@@ -112,16 +112,10 @@ public class ConnectionHandler implements Runnable {
 		int available=-1;
 		while((available=dis.read(fileFragment))!=-1){
 			outStream.write(fileFragment, 0, available);
-			outStream.flush();
 		}
 		incoming.shutdownOutput();
-		String response=readResponse();
-		System.out.println(response);
 	}
-	private String readResponse() throws IOException{
-		String response=responseReader.readLine();
-		return response;
-	}
+	
 	private DataInputStream getDataInputStream() throws FileNotFoundException {
 		String fileName=metadata.getOnServerName()+"."+metadata.getFileExtension();
 		DataInputStream dis=new DataInputStream(new FileInputStream(STORAGE_DIRECTORY+fileName));

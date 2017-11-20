@@ -88,5 +88,12 @@ public class FilesScheduler{
 		
 		
 	}
+	public static void stopArchivization(FileMetadata metadata) {
+		fileMetadataList.remove(metadata);
+		removeFile(metadata);
+	}
 	
+	private static void removeFile(FileMetadata metadata){
+		metadata.removeCorrespondingFile();
+	}
 }

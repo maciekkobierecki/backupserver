@@ -40,4 +40,20 @@ public class FileMetadata implements Serializable {
 			return false;
 			
 	}
+	public void removeCorrespondingFile() {
+		File file=new File(Config.getProperty("dataDirectory")+onServerName+"."+getFileExtension());
+		file.delete();
+	}
+	public boolean equals(Object obj){
+		if(obj==null)
+			return false;
+		final FileMetadata other=(FileMetadata)obj;
+		Boolean dateEquality=date.equals(other.getDate());
+		Boolean onServerNameEquality=onServerName.equals(other.getOnServerName());
+		String myPath=file.getPath();
+		Boolean fileDirectoryEquality=myPath.equals(other.getFileDirectory());
+		if(dateEquality && onServerNameEquality && fileDirectoryEquality)
+			return true;
+		else return false;
+	}
 }
