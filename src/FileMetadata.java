@@ -48,11 +48,9 @@ public class FileMetadata implements Serializable {
 		if(obj==null)
 			return false;
 		final FileMetadata other=(FileMetadata)obj;
-		Boolean dateEquality=date.equals(other.getDate());
-		Boolean onServerNameEquality=onServerName.equals(other.getOnServerName());
 		String myPath=file.getPath();
 		Boolean fileDirectoryEquality=myPath.equals(other.getFileDirectory());
-		if(dateEquality && onServerNameEquality && fileDirectoryEquality)
+		if(fileDirectoryEquality)
 			return true;
 		else return false;
 	}

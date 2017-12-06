@@ -89,11 +89,19 @@ public class FilesScheduler{
 		
 	}
 	public static void stopArchivization(FileMetadata metadata) {
-		fileMetadataList.remove(metadata);
-		removeFile(metadata);
+		Boolean notAllRemoved=true;
+		removeAllFilesThatHasSameName(metadata);
+		while(notAllRemoved)
+			notAllRemoved=fileMetadataList.remove(metadata);			
 	}
 	
 	private static void removeFile(FileMetadata metadata){
 		metadata.removeCorrespondingFile();
+	}
+	
+	private static void removeAllFilesThatHasSameName(FileMetadata toRemoveMetadata){
+		for(FileMetadata metadata: fileMetadataList)
+			if(metadata.equals(toRemoveMetadata))
+				metadata.removeCorrespondingFile();
 	}
 }

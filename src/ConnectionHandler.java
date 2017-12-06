@@ -122,8 +122,8 @@ public class ConnectionHandler implements Runnable {
 		return dis;
 	}
 	private void receiveData() throws IOException{
-		FileOutputStream fos=getFileOutputStream(metadata);
 		if(FilesScheduler.isItNewerVersion(metadata.getFileDirectory(), metadata.getDate())){
+			FileOutputStream fos=getFileOutputStream(metadata);
 			sendPermission();
 			saveFile(fos);
 			FilesScheduler.addFileMetadata(metadata);
